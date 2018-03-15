@@ -3,36 +3,37 @@
 
 #include "AbsRow.h"
 
-class RowAray : public AbsRow {
+template <class T>
+class RowAray : public AbsRow<T> {
     public:
         RowAray(unsigned int numCols) {
-            size = numCols;
-            rowData = new int[numCols];
+            this->size = numCols;
+            this->rowData = new T [numCols];
 
             // Add random values to the row array.
             for (int i = 0; i < numCols; ++i) {
-                rowData[i] = rand() % 90 + 10;
+                this->rowData[i] = rand() % 90 + 10;
             }
         }
 
         virtual ~RowAray() {
-            delete [] rowData;
+            delete [] this->rowData;
         }
 
-        int getSize() const {
-            return size;
+        T getSize() const {
+            return this->size;
         }
 
-        int getData(int i) const {
-            if ( i >= 0 && i < size) {
-                return rowData[i];
+        T getData(int i) const {
+            if (i >= 0 && i < this->size) {
+                return this->rowData[i];
             } else {
                 return 0;
             }
         }
 
-        void setData(int col, int value) {
-            rowData[col] = value;
+        void setData(int col, T value) {
+            this->rowData[col] = value;
         }
 };
 
